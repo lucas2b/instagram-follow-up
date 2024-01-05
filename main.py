@@ -2,14 +2,11 @@
 #carrega lista de objetos contendo alvos
 #percorre lista de objetos e verifica se situação de privacidade mudou
 
-#minhas libs
-import alvo
 import minhas_libs as libs
 
 #libs externas
 import instaloader as instaloader
 import time as time
-from time import strftime
 import sys
 
 TEMPO_INTERVALO_CONSULTA = 3600
@@ -31,7 +28,7 @@ if logarInstagram == 'logar':
 else:
     print("Não utilizará login no instagram...")
 
-while(True):    
+while True:
     for alvo in lista_objetos_alvos:
         
         #recupera atributos do objeto
@@ -44,7 +41,7 @@ while(True):
             isPrivateReturnInstaloader = profile.is_private
             
             #comparando e descobrindo perfis que não são mais privados
-            situacao_string = "PRIVADO" if isPrivateReturnInstaloader else "PÚBLICO" #recupera situação atual do instaloader
+            situacao_string = "PRIVADO" if isPrivateReturnInstaloader else "PÚBLICO"  # recupera situação atual do instaloader
             if isPrivateReturnInstaloader == isPerfilPrivado:
                 #privacidade do perfil não mudou
                 mensagem_nao_mudou = f"Situação do Perfil do(a) {nome_perfil.upper()} não mudou. Situação: {situacao_string}"
@@ -60,7 +57,7 @@ while(True):
                     loader.download_profile(nome_perfil)
                     print(f"Baixou o perfil do(a) {nome_perfil}...")
                     
-                libs.enviar_email(mensagem_mudou)
+                #libs.enviar_email(mensagem_mudou)
 
         except instaloader.LoginRequiredException:
             print(f"Ocorreu uma exceção de login necessário... aguardando {TEMPO_INTERVALO_CONSULTA/60}min... - {libs.hora_atual_string()}\n")
